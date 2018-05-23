@@ -45,7 +45,7 @@
 (defn get-host-port []
   (if (not= "default" *target*)
     {}
-    {:host (.. js/window -location -host)
+    {:host (.. js/window -location -hostname)
      :port (.. js/window -location -port)}))
 
 (defn get-ua-product []
