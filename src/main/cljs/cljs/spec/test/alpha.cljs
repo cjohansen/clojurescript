@@ -43,13 +43,13 @@
   true)
 
 (defn get-host-port []
-  (if (not= "browser" *target*)
+  (if (not= "default" *target*)
     {}
     {:host (.. js/window -location -host)
      :port (.. js/window -location -port)}))
 
 (defn get-ua-product []
-  (if (not= "browser" *target*)
+  (if (not= "default" *target*)
     (keyword *target*)
     (cond
       product/SAFARI :safari
