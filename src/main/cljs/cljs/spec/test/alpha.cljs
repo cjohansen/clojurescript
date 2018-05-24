@@ -80,7 +80,7 @@
             (when frame
               (let [s (:function frame)]
                 (and (string? s) (not (string/blank? s))
-                     (re-find #"cljs\.spec\.test\.spec_checking_fn" s)))))]
+                     (re-find #"cljs.spec.test.alpha.spec_checking_fn" s)))))]
     (->> st
          (drop-while #(not (search-spec-fn %)))
          (drop-while search-spec-fn)
