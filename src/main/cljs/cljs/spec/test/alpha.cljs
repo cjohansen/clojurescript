@@ -48,14 +48,18 @@
     {:host (.. js/window -location -hostname)
      :port (.. js/window -location -port)}))
 
+(def ^:private chrome-ie-re #"(?m)^\s*at .*(\S+\:\d+|\(native\))")
+
+(defn- infer-ua-product [st]
+  (cond
+    (and st (re-find chrome-ie-re st)) :chrome
+    st :firefox
+    :default nil))
+
 (defn get-ua-product []
   (if (not= "default" *target*)
     (keyword *target*)
-    (cond
-      product/SAFARI :safari
-      product/CHROME :chrome
-      product/FIREFOX :firefox
-      product/IE :ie)))
+    (infer-ua-product (.-stack (js/Error.)))))
 
 (defn get-env []
   {:ua-product (get-ua-product)})
